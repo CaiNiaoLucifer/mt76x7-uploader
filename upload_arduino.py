@@ -9,7 +9,7 @@ import pyprind
 import platform
 
 da87_path = './da87.bin'
-da97_path = './da97.bin'
+da97_path = './da97-xiaomi.bin'
 
 logging.basicConfig()
 parser = OptionParser(usage="python %prog [options]")
