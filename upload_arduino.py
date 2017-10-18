@@ -39,7 +39,7 @@ da_path = opt.da_file
 
 if not opt.da_file:
     if opt.platform == 'mt7697':
-        da_path = './da97.bin'
+        da_path = './da97-xiaomi.bin'
     elif opt.platform == 'mt7687':
         da_path = './da87.bin'
     pass
