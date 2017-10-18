@@ -22,8 +22,8 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
   pinMode(LED_BUILTIN, OUTPUT);
-  pinMode(GPIO37_PIN, OUTPUT);
-  pinMode(RST_PIN, OUTPUT);
+  pinMode(GPIO37_PIN, INPUT);
+  pinMode(RST_PIN, INPUT);
 //  attachInterrupt(digitalPinToInterrupt(RTS_PIN), rts_falling, FALLING);
   attachInterrupt(digitalPinToInterrupt(RTS_PIN), rts_changing, CHANGE);
 }
@@ -31,10 +31,11 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   digitalWrite(LED_BUILTIN, state);
-  pinMode(RTS_PIN, INPUT);
   if(has_pulse){
     has_pulse = false;
     Serial.println(pulse_width);
+    pinMode(GPIO37_PIN, OUTPUT);
+    pinMode(RST_PIN, OUTPUT);
     if(pulse_width > 120){
         Serial.println("I am entering normal mode");
         digitalWrite(GPIO37_PIN, LOW);
@@ -48,6 +49,10 @@ void loop() {
         delay(100);
         digitalWrite(RST_PIN, HIGH);
     }
+  }else{
+    //nomarl mode
+    pinMode(GPIO37_PIN, INPUT);
+    pinMode(RST_PIN, INPUT);
   }
 //  Serial.println(digitalRead(RTS_PIN));
 }
